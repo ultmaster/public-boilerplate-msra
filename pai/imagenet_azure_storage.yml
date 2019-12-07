@@ -1,0 +1,37 @@
+protocolVersion: 2
+name: imagenet_azure_storage_template
+type: job
+jobRetryCount: 0
+prerequisites:
+  - type: dockerimage
+    uri: ultmaster/pytorch
+    name: docker_image_0
+taskRoles:
+  taskrole:
+    instances: 1
+    completion:
+      minFailedInstances: 1
+      minSucceededInstances: -1
+    taskRetryCount: 0
+    dockerImage: docker_image_0
+    extraContainerOptions:
+      shmMB: 65536
+    resourcePerInstance:
+      gpu: 4
+      cpu: 16
+      memoryMB: 65536
+      ports:
+        tensorboard: 1
+    commands:
+      - mkdir -p /data/imagenet
+      - 'azcopy copy "<% $secrets.DATA_STORAGE_PREFIX %>/imagenet/meta.bin?<% $secrets.DATA_STORAGE_SUFFIX %>" /data/imagenet/'
+      - 'azcopy copy "<% $secrets.DATA_STORAGE_PREFIX %>/imagenet/val?<% $secrets.DATA_STORAGE_SUFFIX %>" /data/imagenet/ --recursive'
+      - 'azcopy copy "<% $secrets.DATA_STORAGE_PREFIX %>/imagenet/train?<% $secrets.DATA_STORAGE_SUFFIX %>" /data/imagenet/ --recursive'
+      - >-
+        (tensorboard --logdir=/mnt/tensorboard
+        --port=$PAI_PORT_LIST_taskrole_0_tensorboard &)
+secrets:
+  DATA_STORAGE_PREFIX: 'https://xxx.blob.core.windows.net/container_name'
+  DATA_STORAGE_SUFFIX: sas_token
+defaults:
+  virtualCluster: default
