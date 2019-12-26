@@ -1,10 +1,10 @@
 FROM ufoym/deepo:pytorch
 
-RUN pip install --no-cache-dir tensorboard
-
+RUN apt update && apt install -y libsm6 libxext6 libxrender-dev graphviz
+RUN pip install --no-cache-dir tensorboard graphviz opencv-python tqdm pyyaml h5py
 RUN pip install --no-cache-dir --extra-index-url https://developer.download.nvidia.com/compute/redist/cuda/10.0 nvidia-dali
-
 RUN wget -q -O azcopy.tar.gz https://aka.ms/downloadazcopy-v10-linux && \
     tar -xf azcopy.tar.gz && \
     cp azcopy_*/azcopy /usr/local/bin && \
     rm -r azcopy.tar.gz azcopy_*
+RUN git clone -b master https://github.com/ultmaster/nni && cd nni && echo y | bash install.sh && cd .. && rm -rf nni
