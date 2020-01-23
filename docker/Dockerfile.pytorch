@@ -11,4 +11,5 @@ RUN wget -q -O azcopy.tar.gz https://aka.ms/downloadazcopy-v10-linux && \
     rm -r azcopy.tar.gz azcopy_*
 RUN git clone -b master https://github.com/ultmaster/nni && cd nni && echo y | bash install.sh && cd .. && rm -rf nni
 RUN pip install --no-cache-dir tensorflow
+RUN pip install --no-cache-dir pyzmq
 WORKDIR /workspace
