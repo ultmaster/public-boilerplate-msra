@@ -17,7 +17,7 @@ conda activate nnidev
 conda install tensorboard graphviz tqdm pyyaml h5py scikit-learn scipy pyzmq autopep8 pylint jupyter
 conda install -c pytorch pytorch torchvision cudatoolkit=10.1 cudnn
 wget -q -O azcopy.tar.gz https://aka.ms/downloadazcopy-v10-linux && tar -xf azcopy.tar.gz && \
-    sudo cp azcopy_*/azcopy /usr/local/bin && rm -r azcopy.tar.gz azcopy_*
+    sudo cp azcopy_*/azcopy /usr/bin && rm -r azcopy.tar.gz azcopy_*
 pip install --no-cache-dir tensorflow nni
 pip install -U --no-cache-dir grpcio
 pip install -U "git+https://github.com/Microsoft/pai@master#egg=openpaisdk&subdirectory=contrib/python-sdk"
