@@ -36,3 +36,7 @@ pip install -U "git+https://github.com/Microsoft/pai@master#egg=openpaisdk&subdi
 # ssh keygen
 ssh-keygen
 cat ~/.ssh/id_rsa.pub
+
+# git
+git config --global user.name "Yuge Zhang"
+git config --global user.email "scottyugochang@gmail.com"
