@@ -14,7 +14,7 @@ sh Miniconda3-latest-Linux-x86_64.sh
 conda create -n nnidev python=3.7
 sudo apt install -y libsm6 libxext6 libxrender-dev graphviz tmux htop
 conda activate nnidev
-conda install tensorboard graphviz tqdm pyyaml h5py scikit-learn scipy pyzmq autopep8 pylint jupyter
+conda install tensorboard graphviz tqdm pyyaml h5py scikit-learn scipy pyzmq autopep8 pylint jupyter seaborn
 conda install -c pytorch pytorch torchvision cudatoolkit=10.1 cudnn
 wget -q -O azcopy.tar.gz https://aka.ms/downloadazcopy-v10-linux && tar -xf azcopy.tar.gz && \
     sudo cp azcopy_*/azcopy /usr/bin && rm -r azcopy.tar.gz azcopy_*
