@@ -2,7 +2,7 @@ FROM ufoym/deepo:pytorch
 
 RUN apt update && apt install -y libsm6 libxext6 libxrender-dev graphviz tmux htop
 RUN pip install --no-cache-dir tensorboard graphviz opencv-python tqdm pyyaml h5py tensorboardx scikit-learn scipy
-RUN git clone https://github.com/NVIDIA/apex && cd apex && \
+RUN git clone https://github.com/NVIDIA/apex && cd apex && export TORCH_CUDA_ARCH_LIST="6.0;6.1;6.2;7.0;7.5" && \
     pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" ./ && cd ..
 RUN pip install --no-cache-dir --extra-index-url https://developer.download.nvidia.com/compute/redist/cuda/10.0 nvidia-dali
 RUN wget -q -O azcopy.tar.gz https://aka.ms/downloadazcopy-v10-linux && \
@@ -10,6 +10,5 @@ RUN wget -q -O azcopy.tar.gz https://aka.ms/downloadazcopy-v10-linux && \
     cp azcopy_*/azcopy /usr/local/bin && \
     rm -r azcopy.tar.gz azcopy_*
 RUN git clone -b master https://github.com/microsoft/nni && cd nni && echo y | bash install.sh && cd .. && rm -rf nni
-RUN pip install --no-cache-dir tensorflow
-RUN pip install --no-cache-dir pyzmq seaborn
+RUN pip install --no-cache-dir tensorflow pyzmq seaborn
 WORKDIR /workspace
