@@ -10,5 +10,5 @@ RUN wget -q -O azcopy.tar.gz https://aka.ms/downloadazcopy-v10-linux && \
     cp azcopy_*/azcopy /usr/local/bin && \
     rm -r azcopy.tar.gz azcopy_*
 RUN git clone -b master https://github.com/microsoft/nni && cd nni && echo y | bash install.sh && cd .. && rm -rf nni
-RUN pip install --no-cache-dir tensorflow pyzmq seaborn
+RUN pip install --no-cache-dir tensorflow pyzmq seaborn azure-storage-blob
 WORKDIR /workspace
