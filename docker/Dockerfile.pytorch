@@ -12,6 +12,10 @@ RUN wget -q -O azcopy.tar.gz https://aka.ms/downloadazcopy-v10-linux && \
 RUN git clone -b master https://github.com/microsoft/nni && cd nni && echo y | bash install.sh && cd .. && rm -rf nni
 RUN pip install --no-cache-dir tensorflow pyzmq seaborn azure-storage-blob dateparser pymoo
 
+# Scheduler
+RUN pip install --no-cache-dir GPUtil "dask[complete]"
+RUN pip install --no-cache-dir --upgrade dask distributed
+
 # Open-MPI installation
 ENV OPENMPI_VERSION 3.1.2
 RUN mkdir /tmp/openmpi && cd /tmp/openmpi && \
@@ -19,4 +23,5 @@ RUN mkdir /tmp/openmpi && cd /tmp/openmpi && \
     tar zxf openmpi-${OPENMPI_VERSION}.tar.gz && cd openmpi-${OPENMPI_VERSION} && \
     ./configure --enable-orterun-prefix-by-default && make -j $(nproc) all && \
     make install && ldconfig && rm -rf /tmp/openmpi
+
 WORKDIR /workspace
