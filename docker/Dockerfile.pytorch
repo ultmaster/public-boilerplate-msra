@@ -23,5 +23,6 @@ RUN mkdir /tmp/openmpi && cd /tmp/openmpi && \
     tar zxf openmpi-${OPENMPI_VERSION}.tar.gz && cd openmpi-${OPENMPI_VERSION} && \
     ./configure --enable-orterun-prefix-by-default && make -j $(nproc) all && \
     make install && ldconfig && rm -rf /tmp/openmpi
+RUN pip install --no-cache-dir mpi4py
 
 WORKDIR /workspace
