@@ -24,7 +24,7 @@ RUN wget -q -O azcopy.tar.gz https://aka.ms/downloadazcopy-v10-linux && \
     cp azcopy_*/azcopy /usr/local/bin && \
     rm -r azcopy.tar.gz azcopy_* && \
     chmod +x /usr/local/bin/azcopy
-RUN pip install --no-cache-dir nni==1.5
+RUN pip install --no-cache-dir nni==1.6
 RUN pip install --no-cache-dir tensorflow pyzmq seaborn azure-storage-blob dateparser pymoo
 
 WORKDIR /workspace
