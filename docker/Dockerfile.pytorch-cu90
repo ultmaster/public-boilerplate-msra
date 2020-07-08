@@ -1,7 +1,7 @@
-FROM ufoym/deepo:pytorch-py36-cu100
+FROM ufoym/deepo:pytorch-py36-cu90
 
 RUN apt update && apt install -y libsm6 libxext6 libxrender-dev graphviz tmux htop
-RUN pip install --no-cache-dir --extra-index-url https://developer.download.nvidia.com/compute/redist/cuda/10.0 nvidia-dali
+RUN pip install --no-cache-dir --extra-index-url https://developer.download.nvidia.com/compute/redist/cuda/9.0 nvidia-dali
 RUN pip install --no-cache-dir tensorboard graphviz opencv-python tqdm pyyaml h5py tensorboardx scikit-learn scipy \
     pyzmq seaborn azure-storage-blob dateparser pymoo
 RUN wget -q -O azcopy.tar.gz https://aka.ms/downloadazcopy-v10-linux && \
