@@ -1,4 +1,3 @@
-
 FROM nvidia/cuda:9.2-devel-ubuntu18.04
 
 # Install some basic utilities
@@ -8,13 +7,15 @@ RUN apt-get update && apt-get install -y curl ca-certificates sudo git bzip2 lib
 
 # Install Miniconda and Python 3.7
 ENV CONDA_AUTO_UPDATE_CONDA=false
-ENV PATH=/root/miniconda/bin:$PATH
-RUN curl -sLo ~/miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-py37_4.8.2-Linux-x86_64.sh \
-    && chmod +x ~/miniconda.sh \
-    && ~/miniconda.sh -b -p ~/miniconda \
-    && rm ~/miniconda.sh \
+ENV PATH=/miniconda/bin:$PATH
+RUN cd / && curl -sLo /miniconda.sh https://repo.continuum.io/miniconda/Miniconda3-py37_4.8.2-Linux-x86_64.sh \
+    && chmod +x /miniconda.sh \
+    && /miniconda.sh -b -p /miniconda \
+    && rm /miniconda.sh \
     && conda install -y python==3.7.3 \
-    && conda clean -ya
+    && conda clean -ya \
+    && ln -s /miniconda/bin/python /usr/local/bin/python \
+    && ln -s /miniconda/bin/python3 /usr/local/bin/python3
 
 # CUDA 9.2-specific steps
 RUN conda install -y -c pytorch \
