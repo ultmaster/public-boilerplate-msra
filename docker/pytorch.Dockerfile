@@ -1,6 +1,8 @@
 FROM ufoym/deepo:pytorch
 
-RUN apt update && apt install -y libsm6 libxext6 libxrender-dev graphviz tmux htop
+RUN apt update && apt install -y libsm6 libxext6 libxrender-dev graphviz tmux htop \
+    build-essential cmake git python-dev python-numpy libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev \
+    libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libdc1394-22-dev
 RUN pip install --no-cache-dir tensorboard graphviz opencv-python tqdm pyyaml h5py tensorboardx scikit-learn scipy
 RUN git clone https://github.com/NVIDIA/apex && cd apex && export TORCH_CUDA_ARCH_LIST="3.5;3.7;5.2;6.0;6.1;6.2;7.0;7.5" && \
     pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" ./ && cd ..
@@ -20,11 +22,11 @@ RUN mkdir /tmp/openmpi && cd /tmp/openmpi && \
 RUN pip install --no-cache-dir mpi4py
 
 # OpenCV from source
-ENV OPENCV_VERSION 4.4
+ENV OPENCV_VERSION 4.4.0
 RUN mkdir /tmp/opencv && cd /tmp/opencv && \
     wget https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.tar.gz && \
-    tar zxf ${OPENCV_VERSION}.tar.gz && cd ${OPENCV_VERSION} && \
-    mkdir release && cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local .. && \
+    tar zxf ${OPENCV_VERSION}.tar.gz && cd $(ls | grep opencv) && \
+    mkdir release && cd release && cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local .. && \
     make -j $(nproc) && make install && ldconfig && rm -rf /tmp/opencv 
 
 # azcopy
