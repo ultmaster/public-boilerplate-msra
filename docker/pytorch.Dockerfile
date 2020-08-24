@@ -19,14 +19,6 @@ RUN mkdir /tmp/openmpi && cd /tmp/openmpi && \
     make install && ldconfig && rm -rf /tmp/openmpi
 RUN pip install --no-cache-dir mpi4py
 
-# OpenCV from source
-ENV OPENCV_VERSION 4.4
-RUN mkdir /tmp/opencv && cd /tmp/opencv && \
-    wget https://github.com/opencv/opencv/archive/${OPENCV_VERSION}.tar.gz && \
-    tar zxf ${OPENCV_VERSION}.tar.gz && cd ${OPENCV_VERSION} && \
-    mkdir release && cmake -D CMAKE_BUILD_TYPE=RELEASE -D CMAKE_INSTALL_PREFIX=/usr/local .. && \
-    make -j $(nproc) && make install && ldconfig && rm -rf /tmp/opencv 
-
 # azcopy
 RUN wget -q -O azcopy.tar.gz https://aka.ms/downloadazcopy-v10-linux && \
     tar -xf azcopy.tar.gz && \
@@ -36,7 +28,7 @@ RUN wget -q -O azcopy.tar.gz https://aka.ms/downloadazcopy-v10-linux && \
 RUN pip install --no-cache-dir tensorflow pyzmq seaborn azure-storage-blob dateparser pymoo thop addict ipython yapf horovod
 # Dependencies of NNI
 RUN pip install --no-cache-dir schema ruamel.yaml psutil requests astor hyperopt==0.1.2 json_tricks netifaces numpy \
-    coverage colorama scikit-learn pkginfo websockets
+    coverage colorama scikit-learn pkginfo websockets azureml azureml-sdk
 RUN pip install --no-cache-dir --no-deps nni==1.7
 
 WORKDIR /workspace
