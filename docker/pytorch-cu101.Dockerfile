@@ -2,7 +2,7 @@ FROM nvidia/cuda:10.1-devel-ubuntu18.04
 
 # Install some basic utilities
 RUN apt-get update && apt-get install -y curl ca-certificates sudo git bzip2 libx11-6 \
-    libsm6 libxext6 libxrender-dev graphviz tmux htop build-essential wget && \
+    libsm6 libxext6 libxrender-dev graphviz tmux htop build-essential wget cmake && \
     rm -rf /var/lib/apt/lists/*
 
 # Install Miniconda and Python 3.8
