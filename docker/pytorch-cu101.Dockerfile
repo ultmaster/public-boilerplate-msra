@@ -32,6 +32,7 @@ RUN mkdir /tmp/openmpi && cd /tmp/openmpi && \
     ./configure --enable-orterun-prefix-by-default && make -j $(nproc) all && \
     make install && ldconfig && rm -rf /tmp/openmpi
 
+RUN apt update && apt install libgl1-mesa-glx -y
 RUN pip install --no-cache-dir --extra-index-url https://developer.download.nvidia.com/compute/redist nvidia-dali-cuda100
 RUN pip install --no-cache-dir mmcv-full==latest+torch1.6.0+cu101 -f https://openmmlab.oss-accelerate.aliyuncs.com/mmcv/dist/index.html
 RUN git clone https://github.com/open-mmlab/mmdetection.git && \
