@@ -34,7 +34,9 @@ RUN mkdir /tmp/openmpi && cd /tmp/openmpi && \
 
 RUN pip install --no-cache-dir --extra-index-url https://developer.download.nvidia.com/compute/redist nvidia-dali-cuda100
 RUN pip install --no-cache-dir mmcv-full==latest+torch1.6.0+cu101 -f https://openmmlab.oss-accelerate.aliyuncs.com/mmcv/dist/index.html
-RUN git clone https://github.com/open-mmlab/mmdetection.git && cd mmdetection && pip install -r requirements/build.txt && pip install -v -e . && cd ..
+RUN git clone https://github.com/open-mmlab/mmdetection.git && \
+    cd mmdetection && pip install -r requirements/build.txt && \
+    pip install -v -e . && cd ..
 RUN pip install --no-cache-dir graphviz opencv-python tqdm pyyaml horovod \
     pyzmq azure-storage-blob dateparser pymoo thop addict yapf azureml azureml-sdk
 RUN wget -q -O azcopy.tar.gz https://aka.ms/downloadazcopy-v10-linux && \
