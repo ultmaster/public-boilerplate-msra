@@ -1,4 +1,4 @@
-FROM nvidia/cuda:10.1-devel-ubuntu18.04
+FROM nvidia/cuda:10.2-cudnn8-devel-ubuntu18.04
 
 # Install some basic utilities
 RUN apt-get update && apt-get install -y curl ca-certificates sudo git ssh bzip2 libx11-6 \
@@ -26,7 +26,7 @@ RUN mkdir /tmp/openmpi && cd /tmp/openmpi && \
     make install && ldconfig && rm -rf /tmp/openmpi
 
 RUN conda install -y -c pytorch \
-    cudatoolkit=10.1 \
+    cudatoolkit=10.2 \
     pytorch=1.7 torchvision \
     && conda install -y tensorflow-gpu tensorflow tensorboard \
     && conda install -y scikit-learn numpy requests scipy seaborn h5py ipython \
