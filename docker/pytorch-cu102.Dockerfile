@@ -1,8 +1,9 @@
 FROM nvidia/cuda:10.2-cudnn8-devel-ubuntu18.04
 
 # Install some basic utilities
-RUN apt-get update && add-apt-repository -y ppa:redislabs/redis && apt-get update && \
-    apt-get install -y curl ca-certificates sudo git ssh bzip2 software-properties-common libx11-6 gcc iputils-ping \
+RUN apt-get update && apt-get install -y software-properties-common && \
+    add-apt-repository -y ppa:redislabs/redis && apt-get update && \
+    apt-get install -y curl ca-certificates sudo git ssh bzip2 libx11-6 gcc iputils-ping \
     libsm6 libxext6 libxrender-dev graphviz tmux htop build-essential wget cmake libgl1-mesa-glx redis && \
     rm -rf /var/lib/apt/lists/*
 
