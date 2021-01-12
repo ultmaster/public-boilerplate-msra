@@ -1,0 +1,11 @@
+services:
+  work:
+    image: ultmaster/pytorch:cu102
+    runtime: nvidia
+    ports:
+      - 5000:5000
+    volumes:
+      - .:/root
+    command: sleep infinity
+    working_dir: /root
+    network_mode: host
