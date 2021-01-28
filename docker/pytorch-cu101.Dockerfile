@@ -43,7 +43,7 @@ RUN git clone https://github.com/open-mmlab/mmdetection.git && \
     pip install -v . && cd ..
 RUN pip install --no-cache-dir graphviz opencv-python tqdm pyyaml horovod \
     pyzmq azure-storage-blob dateparser pymoo thop addict yapf azureml azureml-sdk dgl-cu101 \
-    dropblock efficientnet_pytorch mmpycocotools redis tianshou
+    dropblock efficientnet_pytorch mmpycocotools redis tianshou lightgbm
 RUN wget -q -O azcopy.tar.gz https://aka.ms/downloadazcopy-v10-linux && \
     tar -xf azcopy.tar.gz && \
     cp azcopy_*/azcopy /usr/local/bin && \
