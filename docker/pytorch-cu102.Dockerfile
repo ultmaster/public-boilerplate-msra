@@ -29,9 +29,9 @@ RUN mkdir /tmp/openmpi && cd /tmp/openmpi && \
 
 RUN conda install -y -c pytorch \
     cudatoolkit=10.2 \
-    pytorch=1.7 torchvision \
+    pytorch=1.7 faiss-gpu torchvision \
     && conda install -y tensorboard \
-    && conda install -y scikit-learn numpy requests scipy seaborn h5py ipython \
+    && conda install -y scikit-learn numpy requests scipy seaborn h5py ipython faiss-gpu \
     && conda clean -ya
 
 RUN pip install --no-cache-dir --extra-index-url https://developer.download.nvidia.com/compute/redist nvidia-dali-cuda100
@@ -43,14 +43,14 @@ RUN git clone https://github.com/open-mmlab/mmdetection.git && \
     pip install -v . && cd ..
 RUN pip install --no-cache-dir graphviz opencv-python tqdm pyyaml horovod \
     pyzmq azure-storage-blob dateparser pymoo thop addict yapf azureml azureml-sdk dgl-cu101 \
-    dropblock efficientnet_pytorch mmpycocotools redis
+    dropblock efficientnet_pytorch mmpycocotools redis tianshou lightgbm
 RUN wget -q -O azcopy.tar.gz https://aka.ms/downloadazcopy-v10-linux && \
     tar -xf azcopy.tar.gz && \
     cp azcopy_*/azcopy /usr/local/bin && \
     rm -r azcopy.tar.gz azcopy_* && \
     chmod +x /usr/local/bin/azcopy
 # frequently-updated packages
-RUN pip install --no-cache-dir onnxruntime onnxruntime-gpu onnx nni==2.0rc1
+RUN pip install --no-cache-dir onnxruntime onnxruntime-gpu onnx nni==2.0
 
 WORKDIR /workspace
 RUN chmod -R a+w /workspace
