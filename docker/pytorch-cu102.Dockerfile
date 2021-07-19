@@ -29,7 +29,7 @@ RUN mkdir /tmp/openmpi && cd /tmp/openmpi && \
 
 RUN conda install -y -c pytorch \
     cudatoolkit=10.2 \
-    pytorch=1.7 faiss-gpu torchvision \
+    pytorch=1.8.1 faiss-gpu torchvision \
     && conda install -y tensorboard \
     && conda install -y scikit-learn numpy requests scipy seaborn h5py ipython faiss-gpu \
     && conda clean -ya
@@ -50,7 +50,7 @@ RUN wget -q -O azcopy.tar.gz https://aka.ms/downloadazcopy-v10-linux && \
     rm -r azcopy.tar.gz azcopy_* && \
     chmod +x /usr/local/bin/azcopy
 # frequently-updated packages
-RUN pip install --no-cache-dir onnxruntime onnxruntime-gpu onnx nni==2.0
+RUN pip install --no-cache-dir onnxruntime onnxruntime-gpu onnx nni
 
 WORKDIR /workspace
 RUN chmod -R a+w /workspace
