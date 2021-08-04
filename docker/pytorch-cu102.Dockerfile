@@ -34,14 +34,11 @@ RUN conda install -y -c pytorch \
     && conda install -y scikit-learn numpy requests scipy seaborn h5py ipython faiss-gpu \
     && conda clean -ya
 
-RUN pip install --no-cache-dir --extra-index-url https://developer.download.nvidia.com/compute/redist nvidia-dali-cuda100
+RUN pip install --no-cache-dir --extra-index-url https://developer.download.nvidia.com/compute/redist nvidia-dali-cuda102
 RUN git clone https://github.com/NVIDIA/apex && cd apex && export TORCH_CUDA_ARCH_LIST="3.5;3.7;5.2;6.0;6.1;6.2;7.0;7.5" && \
     pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" ./ && cd ..
 RUN pip install --no-cache-dir mmcv-full -f https://download.openmmlab.com/mmcv/dist/cu102/torch1.8.0/index.html
-RUN git clone https://github.com/open-mmlab/mmdetection.git && \
-    cd mmdetection && pip install -r requirements/build.txt && \
-    pip install -v . && cd ..
-RUN pip install --no-cache-dir graphviz opencv-python tqdm pyyaml horovod \
+RUN pip install --no-cache-dir mmdet graphviz opencv-python tqdm pyyaml horovod \
     pyzmq azure-storage-blob dateparser pymoo thop addict yapf azureml azureml-sdk dgl-cu101 \
     dropblock efficientnet_pytorch mmpycocotools redis tianshou lightgbm
 RUN wget -q -O azcopy.tar.gz https://aka.ms/downloadazcopy-v10-linux && \
