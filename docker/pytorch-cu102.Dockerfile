@@ -37,7 +37,7 @@ RUN conda install -y -c pytorch \
 RUN pip install --no-cache-dir --extra-index-url https://developer.download.nvidia.com/compute/redist nvidia-dali-cuda100
 RUN git clone https://github.com/NVIDIA/apex && cd apex && export TORCH_CUDA_ARCH_LIST="3.5;3.7;5.2;6.0;6.1;6.2;7.0;7.5" && \
     pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" ./ && cd ..
-RUN pip install --no-cache-dir mmcv-full -f https://download.openmmlab.com/mmcv/dist/cu102/torch1.7.0/index.html
+RUN pip install --no-cache-dir mmcv-full -f https://download.openmmlab.com/mmcv/dist/cu102/torch1.8.0/index.html
 RUN git clone https://github.com/open-mmlab/mmdetection.git && \
     cd mmdetection && pip install -r requirements/build.txt && \
     pip install -v . && cd ..
@@ -50,7 +50,7 @@ RUN wget -q -O azcopy.tar.gz https://aka.ms/downloadazcopy-v10-linux && \
     rm -r azcopy.tar.gz azcopy_* && \
     chmod +x /usr/local/bin/azcopy
 # frequently-updated packages
-RUN pip install --no-cache-dir onnxruntime onnxruntime-gpu onnx nni
+RUN pip install --no-cache-dir onnxruntime onnxruntime-gpu onnx nni utilsd
 
 WORKDIR /workspace
 RUN chmod -R a+w /workspace
