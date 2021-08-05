@@ -24,6 +24,6 @@ jobs:
       uses: docker/build-push-action@v2.6.1
       with:
         context: .
-        file: docker/pytorch-cu102.Dockerfile
+        file: docker/pytorch-19-cu102.Dockerfile
         push: true
-        tags: ultmaster/pytorch:cu102
+        tags: ultmaster/pytorch:19cu102
