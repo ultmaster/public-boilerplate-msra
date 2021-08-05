@@ -40,7 +40,7 @@ RUN git clone https://github.com/NVIDIA/apex && cd apex && export TORCH_CUDA_ARC
 RUN pip install --no-cache-dir mmcv-full -f https://download.openmmlab.com/mmcv/dist/cu102/torch1.8.0/index.html
 RUN pip install --no-cache-dir mmdet graphviz opencv-python tqdm pyyaml horovod \
     pyzmq azure-storage-blob dateparser pymoo thop addict yapf azureml azureml-sdk dgl-cu101 \
-    dropblock efficientnet_pytorch mmpycocotools redis tianshou lightgbm
+    dropblock efficientnet_pytorch mmpycocotools redis tianshou lightgbm pytorch-lightning
 RUN wget -q -O azcopy.tar.gz https://aka.ms/downloadazcopy-v10-linux && \
     tar -xf azcopy.tar.gz && \
     cp azcopy_*/azcopy /usr/local/bin && \
